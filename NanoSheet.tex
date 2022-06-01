@@ -21,60 +21,9 @@
 
 \thispagestyle{empty} 
 \newpage
-\subsection{\large{Arduino IDE}}
-Die Arduino IDE ist eine Programmierumgebung für C++ ohne den Nutzer gleich mit zu vielen Konwentionen zu überlasten wird der Quelltext in einer einzigen ,,ino`` Datei im geichnamingen Verzeichnis gepeichert. Nichts desdo trotz sind im Hitergrund umfangreiche Bibliotheken für Hardware- und Softwaremodule versteck. In der Werkzeugliste findet man dafür den Biblioteks und den Bordverwalter. Außerdem können in den Voreinstellungen auch externe Quellen eingebunden werden.\\
-\subsection{\large{Programmstruktur}}
-Das Programm besteht im wesentlichen aus einer \textit{setup()} Fuktion die beim Start aufgerufen wird und eine \textit{loop()} Schleife die auch wenn sie beendet ist immer wieder vom Prozessor aufgerufen wird.\\
-\begin{lstlisting}[language=c, caption=Beispiel]
-// Ganzzahl (integer) im Bereich von -32768 bis 32767 
-int EineGlobaleVariable; 
-void setup() {
-  // Dieser Code wird beim Start aufgerufn
-  // Diese Variable existiert nur so Lange Setup läuft
-  int EineLokalVariable;  
-}
-
-void loop() {
-  // Dieser Code wird immer wieder aufgerufen
-  // Diese Variable existiert dauerhaft und behält ihren Wert beginnend mit 0
-  static int EineLokalStatischeVariable = 0; 
-}
-\end{lstlisting}
-\newpage
-\subsection{\large{Bibliotheken verwenden}}
-Bibliotheken sind Voreinstellung und Bauanleitungen für Funktionalitäten die wir einfach benutzen wollen ohne uns groß in Details zu verstricken. Die wichtigsten Bibliotheken sind bereits automatisch eingebunden ohne dass wir davon etwas in der Arduino IDE mitbekommen.
-\subsection{Serial}
-Die Verbindung zum seriellen Monitor ermöglicht uns, dass das Board Texte und Zahlen an die Oberfläche senden kann. Damit können wir lesen, was der Prozessor gerade mancht. 
-\begin{lstlisting}[language=c, caption=Beispiel]
-void setup() {
-  Serial.begin(9600);
-}
-
-void loop() {
-  Serial.println("Hallo World");
-  // Eine Wartezeit von 1000 Millisekunden wartet 1 Sekunde    
-  delay(1000);        
-}
-\end{lstlisting}
+\input{chapters/ArduinoIDE}
 
 
-\subsection{\large{Eingänge}}
-\begin{lstlisting}[language=c, caption=Beispiel]
-void setup() {
-   // Pin 2 als Eingang definieren
-  pinMode(2, INPUT); 
-}
-void loop() {
-  // Digitaler Eingang 2 einlesen
-  int buttonState = digitalRead(2); // 
-  // Analogen Eingang A0 einlesen
-  int sensorValue = analogRead(A0); 
-\end{lstlisting}
-
-\subsection{\large{Ausgänge}}
-
-\newpage
-\subsection{\large{Strings}}
 
 Text
 
