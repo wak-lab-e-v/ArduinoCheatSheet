@@ -25,6 +25,10 @@ Datentyp Name (Datentyp Parameter) {
 	return Variable; //Variable muss den gleichen Datentyp haben, wie der zuvor vor dem Funktionsnamen definierte Datentyp
 	//in void-Funktionen brauchen wir kein "return"
 }
+//Ein Beispiel für eine eigene Funktion:
+int plusEins (int zahl) {
+	return zahl + 1; //addiere eins zu der Zahl und gebe sie zurück
+}
 //So sehen die Standard-Funktionen aus, bevor du sie anpasst:
 void setup() {
   // Dieser Code wird beim Start aufgerufen
@@ -35,13 +39,8 @@ void setup() {
 void loop() {
   // Dieser Code wird immer wieder aufgerufen
   // Diese Variable existiert dauerhaft und behält ihren Wert beginnend mit 0
-  int EineLokaleVariable = 0; 
-}
-
-//Ein Beispiel für eine eigene Funktion:
-int plusEins (int zahl) {
-	zahl = zahl + 1; //addiere 1 zu der gegebenen Zahl
-	return zahl; //gebe die Zahl zurück ans Hauptprogramm
+  int eineLokaleVariable = 0; 
+  int eineLokaleVariablePlusEins = plusEins(eineLokaleVariable);
 }
 \end{lstlisting}
 \subsection{\large{Bibliotheken verwenden}}
@@ -72,8 +71,9 @@ void loop() {
   int knopfStatus = digitalRead(2); // digital gibt uns an/aus an
   // Analogen Eingang A0 einlesen
   int sensorWert = analogRead(A0); //analog gibt uns genaue Spannungswerte am jeweiligen Pin an
+}
 \end{lstlisting}
-\hfill \break \hfill \break \hfill \break \hfill \break \hfill \break \hfill \break \hfill \break \hfill \break \hfill \break \hfill \break \hfill \break \hfill \break \hfill \break \hfill \break \hfill \break
+\hfill \break \hfill \break \hfill \break \hfill \break \hfill \break \hfill \break \hfill \break \hfill \break \hfill \break \hfill \break \hfill \break \hfill \break \hfill \break \hfill \break
 \subsection{\large{Ausgänge}}
 Für Ausgänge machen wir genau das gleiche, nur mit anderen Funktionsaufrufen:
 \begin{lstlisting}[language=c, caption=Ausgänge am Arduino nutzen]
@@ -87,4 +87,5 @@ void loop() {
   analogWrite(3, 120); //setzt die Spannung am Pin 3 auf 120 den Wert 120 (Maximal gehen 255)
   //mit analogWrite kann man z.B. die Helligkeit einer LED variabel einstellen, wenn die LED das erlaubt
   delay(1000);
+}
 \end{lstlisting}
