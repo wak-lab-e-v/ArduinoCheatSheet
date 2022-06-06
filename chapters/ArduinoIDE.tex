@@ -1,52 +1,90 @@
 \subsection{\large{Arduino IDE}}
-Die Arduino IDE ist eine Programmierumgebung für C++ ohne den Nutzer gleich mit zu vielen Konwentionen zu überlasten wird der Quelltext in einer einzigen ,,ino`` Datei im geichnamingen Verzeichnis gepeichert. Nichts desdo trotz sind im Hitergrund umfangreiche Bibliotheken für Hardware- und Softwaremodule versteck. In der Werkzeugliste findet man dafür den Biblioteks und den Bordverwalter. Außerdem können in den Voreinstellungen auch externe Quellen eingebunden werden.\\
+Die Arduino IDE ist das Programm, mit dem du Microcomputer, wie etwa den Arduino relativ einfach programmieren kannst. Wenn du später fortgeschrittener bist, kannst du auch andere Programme, wie etwa Visual Studio Code verwenden. Dateien für den Arduino werden mit der Dateiendung ".ino" gespeichert und sind in der Sprache C++ geschrieben.\\
 \subsection{\large{Programmstruktur}}
-Das Programm besteht im wesentlichen aus einer \textit{setup()} Fuktion die beim Start aufgerufen wird und eine \textit{loop()} Schleife die auch wenn sie beendet ist immer wieder vom Prozessor aufgerufen wird.\\
-\begin{lstlisting}[language=c, caption=Beispiel]
-// Ganzzahl (integer) im Bereich von -32768 bis 32767 
-int EineGlobaleVariable; 
+Das Programm besteht im wesentlichen aus einer \textit{"setup()"} Funktion, die beim Programmstart aufgerufen wird und eine \textit{"loop()"} Funktion, die sich automatisch immer wieder wiederholt. Im deutschen nennt man diese Art der Funktion "Schleife".\\
+Damit sich der Computer Dinge merken kann, nutzen wir sogenannte Variablen.
+Diese haben verschiedene Typen, doch das ist ganz einfach:
+\begin{lstlisting}[language=c, caption=Datentypen in C]
+int eineZahl = 27; // "int" für ganze Zahlen (von -32768 bis 32767)
+string einWort = "Hallo:)"; // "string" für Wörter oder Sätze
+double eineKommazahl = 5.2; // "double" für Zahlen mit Komma
+boolean wahr = true; // "boolean" für Wahr oder Falsch
+boolean falsch = false;
+void // "void" für nichts (wird bei Funktionen genutzt, die nichts zurückgeben sollen)
+// "//" für Kommentare
+
+\end{lstlisting}
+\hfill \break \hfill \break \hfill \break
+Damit der Computer etwas berechnen kann, brauchen wir Funktionen. Neben den Standard-Funktion  \textit{"setup()"} und \textit{"loop()"} können wir uns auch eigene bauen. Der Vorteil davon ist, dass man damit recht unkompliziert lange Rechnungen wiederholen kann, ohne den kompletten Code neu schreiben zu müssen.
+Das ganze geht so:
+
+\begin{lstlisting}[language=c, caption=Funktionen in C]
+Datentyp Name (Datentyp Parameter) {
+	//Parameter dienen der Weiterverwendung von Variablen aus dem Hauptprogramm
+	Code der Funktion; 
+	return Variable; //Variable muss den gleichen Datentyp haben, wie der zuvor vor dem Funktionsnamen definierte Datentyp
+	//in void-Funktionen brauchen wir kein "return"
+}
+//So sehen die Standard-Funktionen aus, bevor du sie anpasst:
 void setup() {
-  // Dieser Code wird beim Start aufgerufn
+  // Dieser Code wird beim Start aufgerufen
   // Diese Variable existiert nur so Lange Setup läuft
-  int EineLokalVariable;  
+  int EineLokaleVariable;  
 }
 
 void loop() {
   // Dieser Code wird immer wieder aufgerufen
   // Diese Variable existiert dauerhaft und behält ihren Wert beginnend mit 0
-  static int EineLokalStatischeVariable = 0; 
+  int EineLokaleVariable = 0; 
+}
+
+//Ein Beispiel für eine eigene Funktion:
+int plusEins (int zahl) {
+	zahl = zahl + 1; //addiere 1 zu der gegebenen Zahl
+	return zahl; //gebe die Zahl zurück ans Hauptprogramm
 }
 \end{lstlisting}
 \subsection{\large{Bibliotheken verwenden}}
 Bibliotheken sind Voreinstellung und Bauanleitungen für Funktionalitäten die wir einfach benutzen wollen ohne uns groß in Details zu verstricken. Die wichtigsten Bibliotheken sind bereits automatisch eingebunden ohne dass wir davon etwas in der Arduino IDE mitbekommen.
 \subsection{Serial}
-Die Verbindung zum seriellen Monitor ermöglicht uns, dass das Board Texte und Zahlen an die Oberfläche senden kann. Damit können wir lesen, was der Prozessor gerade mancht. 
-\begin{lstlisting}[language=c, caption=Beispiel]
+Die Verbindung zum "seriellen Monitor" ermöglicht uns, dass der Mikrocomputer Texte und Zahlen an uns senden kann. Damit können wir lesen, was der Prozessor (Rechner) gerade macht. 
+\begin{lstlisting}[language=c, caption=Ausgabe von Text an den Programmierer]
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(9600); //diesen Command im Setup benötigen wir, damit der Computer weiß, wie er mit uns reden soll
 }
 
-void loop() {
-  Serial.println("Hallo World");
+void loop() { //Diese Funktion schreibt uns jede Sekunde "Hallo Welt"
+  Serial.println("Hallo Welt");
   // Eine Wartezeit von 1000 Millisekunden wartet 1 Sekunde    
   delay(1000);        
 }
 \end{lstlisting}
-
+\newpage
 \subsection{\large{Eingänge}}
-\begin{lstlisting}[language=c, caption=Beispiel]
+Damit wir z.B. Knöpfe oder Sensoren verwenden können, müssen wir dem Computer sagen, an welchem Pin wir unsere Sachen angeschlossen haben. Welcher Pin was kann am Mikrocontroller steht im Datenblatt von diesem. Rechts findest du das Datenblatt vom "Arduino Nano".
+\begin{lstlisting}[language=c, caption=Eingänge am Arduino lesen]
 void setup() {
    // Pin 2 als Eingang definieren
   pinMode(2, INPUT); 
 }
 void loop() {
   // Digitaler Eingang 2 einlesen
-  int buttonState = digitalRead(2); // 
+  int knopfStatus = digitalRead(2); // digital gibt uns an/aus an
   // Analogen Eingang A0 einlesen
-  int sensorValue = analogRead(A0); 
+  int sensorWert = analogRead(A0); //analog gibt uns genaue Spannungswerte am jeweiligen Pin an
 \end{lstlisting}
-
+\hfill \break \hfill \break \hfill \break \hfill \break \hfill \break \hfill \break \hfill \break \hfill \break \hfill \break \hfill \break \hfill \break \hfill \break \hfill \break \hfill \break \hfill \break
 \subsection{\large{Ausgänge}}
-
-
-\subsection{\large{Strings}}
+Für Ausgänge machen wir genau das gleiche, nur mit anderen Funktionsaufrufen:
+\begin{lstlisting}[language=c, caption=Ausgänge am Arduino nutzen]
+void setup() {
+   // Pin 2 als Ausgang definieren
+  pinMode(2, OUTPUT); 
+  pinMode(A0, OUTPUT);
+}
+void loop() {
+  digitalWrite(2, HIGH); //setzt die Spannung am Pin 2 auf den Maximalwert
+  analogWrite(3, 120); //setzt die Spannung am Pin 3 auf 120 den Wert 120 (Maximal gehen 255)
+  //mit analogWrite kann man z.B. die Helligkeit einer LED variabel einstellen, wenn die LED das erlaubt
+  delay(1000);
+\end{lstlisting}
